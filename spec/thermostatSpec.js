@@ -13,17 +13,23 @@ describe('Thermostat', function() {
     });
   });
 
-  describe('up', function(){
+  describe('up', function() {
     it('increases the temparature by 1', function() {
       thermostat.up()
       expect(thermostat.temperature).toBe(21)
     });
   });
 
-  describe('down', function(){
+  describe('down', function() {
     it ('decreases the temperature by 1', function() {
       thermostat.down()
       expect(thermostat.temperature).toBe(19)
     })
-  })
+
+    it('throws error when it is already at minimum temperature', function() {
+      thermostat.temperature -= 10
+      console.log(thermostat.temperature)
+      expect(thermostat.down()).toThrow('Minimum temperature reached');
+    });
+  });
 });
