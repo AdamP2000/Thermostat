@@ -15,4 +15,7 @@ class Thermostat {
       throw 'Minimum temperature reached';
     }
   };
+  powerSavingOn() {
+    this.isPowerSaving = true;
+  }
 };

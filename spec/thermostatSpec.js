@@ -37,11 +37,15 @@ describe('Thermostat', function() {
     it ('starts with power saving mode off', function() {
       expect(thermostat.isPowerSaving).toBe(false)
     })
+    it('has a max temp of 25 degrees when on', function() {
+      this.temparature += 5
+      expect(function() {thermostat.up();}).toThrow ('Max temperature, power saving mode is on');
+    })
   })
 
   describe('power saving on', function() {
     it('sets power saving to true', function() {
-      thermostat.powerSavingOn
+      thermostat.powerSavingOn()
       expect(thermostat.isPowerSaving).toBe(true)
     });
   });
