@@ -26,57 +26,75 @@ describe('Thermostat', function() {
       expect(thermostat.temperature).toBe(19)
     })
 
-    it('throws error when it is already at minimum temperature', function() {
+    it('throws error when at minimum temperature', function() {
       thermostat.temperature = 10
       expect(function() {thermostat.down();}).toThrow ('Minimum temperature reached');
     });
   });
 
-  describe('isPowerSaving', function() {
-    it ('starts with power saving mode off', function() {
-      expect(thermostat.isPowerSaving).toBe(false)
+  describe('isPowerSavingMode', function() {
+    it ('starts with power saving mode on', function() {
+      expect(thermostat.isPowerSavingMode).toBe(true)
     })
 
-    it('has a max temp of 25 degrees when on', function() {
+    it('sets maximum temperature to 25 when on', function() {
       thermostat.powerSavingOn()
       thermostat.temperature = 25
-      expect(function() {thermostat.up();}).toThrow ('Max temperature reached');
+      expect(function() {thermostat.up();}).toThrow ('Maximum temperature reached');
     })
 
-    it('has max temp of 32 degrees when off', function() {
+    it('sets maximum temperature to 32 when off', function() {
       thermostat.temperature = 32
       expect(function() { thermostat.up(); }).toThrow('Maximum temperature reached')
     });
   });
 
-  describe('power saving on', function() {
-    it('sets power saving to true', function() {
-      thermostat.powerSavingOn()
-      expect(thermostat.isPowerSaving).toBe(true)
+  describe('powerSavingOff', function() {
+    it('sets power saving to false', function() {
+      thermostat.powerSavingOff();
+      expect(thermostat.isPowerSavingMode).toBe(false);
     });
   });
 
-  describe('resetTemperature', function() {
+
+  describe('powerSavingOn', function() {
+    it('sets power saving to true', function() {
+      thermostat.powerSavingOff()
+      expect(thermostat.isPowerSavingMode).toBe(false);
+
+      thermostat.powerSavingOn()
+      expect(thermostat.isPowerSavingMode).toBe(true)
+    });
+
+    it('reduces temperature to maximum if it is higher', function() {
+      thermostat.temperature = 30
+      thermostat.powerSavingOn()
+      expect(thermostat.temperature).toBe(25)
+    });
+  });
+
+  describe('reset', function() {
     it ('resets back to 20 degrees', function() {
       thermostat.up()
-      thermostat.resetTemperature()
+      thermostat.reset()
       expect(thermostat.temperature).toBe(20)
     })
   })
 
   describe('energyUsage', function() {
-    it('is low when temperature < 18', function() {
+    it('returns low when temperature < 18', function() {
       thermostat.temperature = 17
-      expect(thermostat.energyUsage()).toBe('Low')
+      expect(thermostat.energyUsage()).toBe('low-usage')
     });
 
-    it('is high when temperature > 25', function() {
-      thermostat.temperature = 38
-      expect(thermostat.energyUsage()).toBe('High')
+    it('returns high when temperature > 25', function() {
+      thermostat.temperature = 26
+      expect(thermostat.energyUsage()).toBe('high-usage')
     })
 
-    it('is medium when 18..25', function() {
-      thermostat.thermostat = 20
+    it('returns medium when 18..25', function() {
+      thermostat.temperature = 18
+      expect(thermostat.energyUsage()).toBe('medium-usage')
     });
   });
 });
