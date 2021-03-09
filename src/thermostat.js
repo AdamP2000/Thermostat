@@ -8,6 +8,10 @@ class Thermostat {
   }
 
   down() {
-    this.temperature -= 1;
+    if (this.temperature >= 11) {
+      this.temperature -= 1;
+    } else {
+      throw 'Minimum temperature reached';
+    }
   };
 };

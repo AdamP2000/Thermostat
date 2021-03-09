@@ -29,7 +29,12 @@ describe('Thermostat', function() {
     it('throws error when it is already at minimum temperature', function() {
       thermostat.temperature -= 10
       console.log(thermostat.temperature)
-      expect(thermostat.down()).toThrow('Minimum temperature reached');
+      expect(function() {thermostat.down();}).toThrow ('Minimum temperature reached');
     });
   });
+  describe('powerSaving', function() {
+    it ('starts with power saving mode off', function() {
+      expect(thermostat.powerSaving).toBe(false)
+    })
+  })
 });
