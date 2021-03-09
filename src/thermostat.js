@@ -5,7 +5,12 @@ class Thermostat {
   }
 
   up() {
-    this.temperature += 1;
+    if(!this.isPowerSaving && this.temperature < 25) {
+      this.temperature += 1
+      debugger;
+    } else {
+      throw 'Max temperature, power saving mode is on'
+    }
   }
 
   down() {
@@ -15,6 +20,7 @@ class Thermostat {
       throw 'Minimum temperature reached';
     }
   };
+
   powerSavingOn() {
     this.isPowerSaving = true;
   }

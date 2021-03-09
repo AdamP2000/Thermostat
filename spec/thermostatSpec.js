@@ -27,8 +27,7 @@ describe('Thermostat', function() {
     })
 
     it('throws error when it is already at minimum temperature', function() {
-      thermostat.temperature -= 10
-      console.log(thermostat.temperature)
+      thermostat.temperature = 10
       expect(function() {thermostat.down();}).toThrow ('Minimum temperature reached');
     });
   });
@@ -37,11 +36,18 @@ describe('Thermostat', function() {
     it ('starts with power saving mode off', function() {
       expect(thermostat.isPowerSaving).toBe(false)
     })
+
     it('has a max temp of 25 degrees when on', function() {
-      this.temparature += 5
+      thermostat.powerSavingOn()
+      thermostat.temparature = 25
       expect(function() {thermostat.up();}).toThrow ('Max temperature, power saving mode is on');
     })
-  })
+
+    it('has max temp of 32 degrees when off', function() {
+      thermostat.temparature = 32
+      expect(function() { thermostat.up(); }).toThrow('Maximum temperature reached')
+    });
+  });
 
   describe('power saving on', function() {
     it('sets power saving to true', function() {
