@@ -67,7 +67,11 @@ describe('Thermostat', function() {
   describe('energyUsage', function() {
     it('is low when temperature < 18', function() {
       thermostat.temperature = 17
-      expect(thermostat.energyUsage).toBe('Low')
+      expect(thermostat.energyUsage()).toBe('Low')
     });
   });
+  it('is high when temperature > 25', function() {
+    thermostat.temperature = 38
+    expect(thermostat.energyUsage()).toBe('High')
+  })
 });

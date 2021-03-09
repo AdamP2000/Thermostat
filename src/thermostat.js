@@ -29,4 +29,8 @@ class Thermostat {
   resetTemperature() {
     this.temperature = 20
   };
+
+  energyUsage() {
+    return 'Low'
+  }
 };
