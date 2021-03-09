@@ -31,6 +31,9 @@ class Thermostat {
   };
 
   energyUsage() {
-    return 'Low'
+    if(this.temperature < 18) {
+      return 'Low'
+    }
+    return 'High'
   }
 };
