@@ -55,6 +55,7 @@ describe('Thermostat', function() {
       expect(thermostat.isPowerSaving).toBe(true)
     });
   });
+
   describe('resetTemperature', function() {
     it ('resets back to 20 degrees', function() {
       thermostat.up()
@@ -62,4 +63,11 @@ describe('Thermostat', function() {
       expect(thermostat.temperature).toBe(20)
     })
   })
+
+  describe('energyUsage', function() {
+    it('is low when temperature < 18', function() {
+      thermostat.temperature = 17
+      expect(thermostat.energyUsage).toBe('Low')
+    });
+  });
 });
