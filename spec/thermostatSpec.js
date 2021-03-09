@@ -39,12 +39,12 @@ describe('Thermostat', function() {
 
     it('has a max temp of 25 degrees when on', function() {
       thermostat.powerSavingOn()
-      thermostat.temparature = 25
-      expect(function() {thermostat.up();}).toThrow ('Max temperature, power saving mode is on');
+      thermostat.temperature = 25
+      expect(function() {thermostat.up();}).toThrow ('Max temperature reached');
     })
 
     it('has max temp of 32 degrees when off', function() {
-      thermostat.temparature = 32
+      thermostat.temperature = 32
       expect(function() { thermostat.up(); }).toThrow('Maximum temperature reached')
     });
   });
@@ -55,4 +55,11 @@ describe('Thermostat', function() {
       expect(thermostat.isPowerSaving).toBe(true)
     });
   });
+  describe('resetTemperature', function() {
+    it ('resets back to 20 degrees', function() {
+      thermostat.up()
+      thermostat.resetTemperature()
+      expect(thermostat.temperature).toBe(20)
+    })
+  })
 });
