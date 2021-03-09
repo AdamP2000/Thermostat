@@ -32,9 +32,17 @@ describe('Thermostat', function() {
       expect(function() {thermostat.down();}).toThrow ('Minimum temperature reached');
     });
   });
-  describe('powerSaving', function() {
+
+  describe('isPowerSaving', function() {
     it ('starts with power saving mode off', function() {
-      expect(thermostat.powerSaving).toBe(false)
+      expect(thermostat.isPowerSaving).toBe(false)
     })
   })
+
+  describe('power saving on', function() {
+    it('sets power saving to true', function() {
+      thermostat.powerSavingOn
+      expect(thermostat.isPowerSaving).toBe(true)
+    });
+  });
 });
