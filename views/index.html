@@ -5,18 +5,41 @@
     <script src="../src/thermostat.js"></script>
     <link></link>
   </head>
+<style>
+.low-usage {
+color: green;
+}
+
+.medium-usage {
+color: black;
+}
+
+.high-usage {
+color: red;
+}
+  </style>
   <body>
+    <script src="../jquery-3.6.0.js"></script>
+    <script src="../src/interface.js"></script>
     <h1>Thermostat</h1>
-
+    <h1 id="temperature"></h1>
     <h2>Temperature Controls</h2>
-    <button>+</button>
-    <button>-</button>
-    <button>Reset</button>
+    <button id = "temperature-up">+</button>
+    <button id = "temperature-down">-</button>
+    <button id = "temperature-reset">Reset</button>
+    <section>
+      <h1>Current temperature: <span id="current-temperature">20</span></h1>
 
-    <button>Energy Usage</button>
+      <select id="current-city">
+        <option value="london">London</option>
+        <option value="newyork">New York</option>
+        <option value="paris">Paris</option>
+        <option value="tokyo">Tokyo</option>
+      </select>
+    </section>
 
     <p>Power Saving Mode <span>on</span></p>
-    <button>On</button>
-    <button>Off</button>
+    <button id = "powersaving-on">On</button>
+    <button id = "powersaving-off">Off</button>
   </body>
 </html>
